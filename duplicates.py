@@ -3,16 +3,11 @@ from os.path import getsize, join
 from itertools import groupby
 
 
-# def are_duplicates(file_1, file_2):
-#     return file_1[:1] == file_2[:1]
-
-
 def are_files_duplicates(file_path):
     file_list = [[walk_path[0], walk_file,
                  getsize(join(walk_path[0], walk_file))]
                  for walk_path in walk(file_path)
                  for walk_file in walk_path[2]]
-    # print(*file_list, sep='\n')
     file_list.sort(key=lambda x: x[1:])
     grouped_files = groupby(file_list, key=lambda x: x[1:])
     for key, group in grouped_files:
